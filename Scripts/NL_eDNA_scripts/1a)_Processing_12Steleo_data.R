@@ -198,7 +198,7 @@ final_df_full[,c(3:58)] <- final_df_full[,c(3:58)]-final_df_full[,c(59:114)]
 # This results in a df with field neg- corrected read counts for each sample at each site
 final_df_full[, grep("^Neg", names(final_df_full))] <- NULL
 
-# ******ADDED IN MAY 2023: dealing with samples with no field blank
+# ******Dealing with samples with no field blank***********
 # subtract out average read depth per ASV for sites sampled on same day (at least 2 for each missing sample)
 # Sites without sequenced field blanks:
 # 1102019 -sampled on 29 Aug 2019; same day as NAC2019, PAL2019,1092019 (also 4 other with no field blank)
@@ -353,136 +353,6 @@ uniqASVfish_max <- spread(uniqASVfish_max, key = taxon, value = pres_abs)
 write.csv(uniqASVfish_max,"uniqASVfish_maxlab_12steleo.csv",row.names=FALSE)
 
 
-#----Analysis of just field negatives----
-# Note that the negative samples here are only those that did have reads 
-# Those that did not did not make it through the pipeline
-neg_full <- sites_full %>% filter(grepl("[N]$", site))
-colnames(neg_full) <- gsub(x = colnames(neg_full), 
-                           pattern = ".", replacement = " ",fixed=T)
-#get read count per taxon per site
-read_avg_full <- gather(neg_full, taxon, read_count, 
-                   c("Salvelinus":"Gallinago gallinago 1"), 
-                   factor_key=TRUE)
-# Get rid of numbers at the end of taxa (i.e. "Aguilla 1")
-read_avg_full$taxon <- sub("[0-9]$","",read_avg_full$taxon)
-# Get rid of spaces at the end of taxa
-read_avg_full$taxon <- sub("[ ]$","",read_avg_full$taxon)
-
-# Choose only samples with hits
-read_avg_hit_full <- read_avg_full %>% filter(read_count>=1)
-# Find the average read count (*In samples WITH hits)
-read_avg1_full<- read_avg_hit_full %>% group_by(taxon) %>% 
-  summarise_each(funs(mean))
-fblank_avg_full <- read_avg1_full[-2]
-fblank_avg_full$read_count <- format(round(fblank_avg_full$read_count, 0))
-colnames(fblank_avg_full)[2] <- "avg_read_count_hits"
-
-#add column for number of sites with hits
-site_num_full <- read_avg_hit_full %>% 
-  group_by(taxon) %>% summarise(count=n_distinct(site))
-#Check that sites are identical between fblank_avg and site_num
-identical(site_num_full$taxon,fblank_avg_full$taxon) 
-fblank_avg_full$site_num <- as.numeric(unlist(site_num_full[2]))
-fblank_avg_full$avg_read_count_hits <- as.numeric(fblank_avg_full$avg_read_count_hits)
-
-# Plot neg samples with average hits by taxon
-library(ggplot2)
-breaks=c(10,100,1000,10000, 100000)
-negplot_full <-  ggplot(fblank_avg_full, aes(x = taxon, y = avg_read_count_hits,fill=taxon)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  scale_y_log10(breaks=breaks,labels=breaks)+
-  geom_text(aes(label = site_num), vjust = 1,cex=3.5)+
-  theme_classic() + xlab("Taxon") +ylab("Mean Read Count")+
-  ggtitle("Field Negative Samples with Hits for 12Steleo (/151 sites)")+
-  theme(panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank())+
-  theme_bw()+
-  theme(legend.position="none")+
-  theme(axis.text.x=element_text(angle=70,vjust= 1,hjust=1,color="black"))
-negplot_full
-
-negboxplot_full <-  ggplot(read_avg_hit_full, aes(x = taxon, y = read_count,fill=taxon)) +
-  geom_boxplot(outlier.shape=NA) +
-  theme_classic() + xlab("Taxon") +ylab("Read Count")+
-  geom_jitter(width = 0.25,size=0.5,colour="black")+
-  theme(panel.grid.minor=element_blank(),panel.background=element_blank()) +
-  scale_y_log10(breaks=breaks,labels=breaks)+
-  ggtitle("Field Negative Samples with Hits for 12Steleo (/151 Sites)")+
-  theme(panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank())+
-  theme_bw()+
-  theme(legend.position="none")+
-  theme(axis.text.x=element_text(angle=70,vjust= 1,hjust=1,color="black"))
-negboxplot_full
-
-# Analysis of sites with hits by year
-site_year <- read.csv(here("site_year.csv"))
-read_avg_hit_full$site_noN <- sub("[N]$","",read_avg_hit_full$site)
-findyear_site_full <- site_year[site_year$site %in% read_avg_hit_full$site_noN,]
-agg_findyear_full <- findyear_site_full %>% 
-  group_by(site,year) %>% summarise_each(funs(sum))
-site_year_full <- agg_findyear_full[,c(1,2)]
-colnames(site_year_full)[1] <- "site_noN"
-negyear_full <- merge(read_avg_hit_full,site_year_full,by="site_noN")
-negyear_full$year <- as.factor(negyear_full$year)
-
-negplot_year_full <-  ggplot(negyear_full, aes(x = taxon, y = read_count,fill=taxon)) +
-  geom_boxplot(outlier.shape=NA) +
-  scale_fill_discrete(guide = "none") +
-  geom_jitter(aes(x = taxon,y = read_count , colour = year),
-              data=negyear_full, size=1.5, width=0.2)+
-  theme_classic() + xlab("Taxon") +ylab("Read Count")+
-  theme(panel.grid.minor=element_blank(),panel.background=element_blank()) +
-  scale_y_log10(breaks=breaks,labels=breaks)+
-  ggtitle("Field Negative Samples with Hits for 12Steleo (/151 Sites) by Year")+
-  theme_bw()+
-  theme(panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank())+
-  theme(axis.text.x=element_text(angle=70,vjust= 1,hjust=1,color="black"))
-negplot_year_full
-
-#----- Total read count per taxon per site--------
-# UPDATED MAY 2023
-# Convert ones to zeroes as well before summing read counts
-# Should consider singletons on a per-sample basis rather than per-site (??)
-lab_blank_max_sub2 <- lab_blank_max_sub[,-2]
-#convert everything less than 2 to NA
-lab_blank_max_sub2[lab_blank_max_sub2 <2] <- NA
-#add back in stub names that were changed to NA
-lab_blank_max_sub2 <- cbind(lab_blank_max_sub$site,lab_blank_max_sub2[,-1])
-
-
-colnames(lab_blank_max_sub2)[1] <- "site"
-colnames(lab_blank_max_sub2) <- gsub(x = colnames(lab_blank_max_sub2), #remove periods from column names
-                                     pattern = ".", replacement = " ",fixed=T)
-# Aggregate samples by site and sum read counts
-agg_read_max <- lab_blank_max_sub2 %>% group_by(site) %>% 
-  summarise_each(funs(sum(., na.rm=TRUE))) #this sums pres/abs counts for each taxon
-#select only fish 
-onlyfish_readmax <- agg_read_max[,c(1,2,3,4,6,8,10,12,13,14,18,21,23,24,
-                                    26:29,33,35,36,38,
-                                    41:43,47,51:53,57)]
-# Formatting column names to combine multiple ASVs per species:
-library(tidyr)
-# Gather 
-onlyfish_readmax2 <- gather(onlyfish_readmax, taxon, read_depth, 
-                            c("Salvelinus":"Salmo trutta"), 
-                            factor_key=TRUE)
-# save as CSV (can use when looking at diffs among ASVs)
-write.csv(onlyfish_readmax2, "12steleo_readcount_ASVspecific.csv",
-          row.names=FALSE)
-
-# Get rid of numbers at the end of taxa (i.e. "Aguilla 1")
-onlyfish_readmax2$taxon <- sub("[0-9]$","",onlyfish_readmax2$taxon)
-# Get rid of spaces at the end of taxa
-onlyfish_readmax2$taxon <- sub("[ ]$","",onlyfish_readmax2$taxon)
-# Merge by taxa and add pres_abs
-onlyfish_readmax2$site <- as.factor(onlyfish_readmax2$site)
-onlyfish_readmax2$taxon <- as.factor(onlyfish_readmax2$taxon)
-uniqASVfish_readmax<- onlyfish_readmax2 %>% group_by(site,taxon) %>% 
-  summarise_each(funs(sum))
-write.csv(uniqASVfish_readmax,"12steleo_readcounts.csv",row.names=FALSE)
-
 #-----Read counts/taxon/field sample AND total raw read depth/field sample---------
 # drop stub column
 lab_blank_max_sub <- lab_blank_max_sub[,-1]
@@ -536,4 +406,3 @@ teleo_fish_depths3$marker <- "12Steleo"
 
 write.csv(teleo_fish_depths3,"12Steleo_depths_perfieldsample.csv",row.names=FALSE)
 
-#test change2
