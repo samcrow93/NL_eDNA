@@ -307,7 +307,7 @@ cp blast_FISHE_range.out blast_FISHE_range.csv
 # Resulting output is much more manageable to work with on personal computer
 # Note that this script also formats blast.out files for MIFISHU and 12Steleo markers and converts them to .csv files
 module load nixpkgs/16.09 gcc/7.3.0 StdEnv/2020 r/4.2.1
-Rscript FISHE_alltaxa_wrangle.R
+Rscript FISHE_data_wrangle.R
 
 
 # At this point, ASV table files and blast output files can be transferred to personal computer
