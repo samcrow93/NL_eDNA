@@ -1,0 +1,3 @@
+NC_041244.1_Gasterosteus_aculeatus_mitochondrion,_complete_genome	0.001
+NC_004379.1_Lota_lota_mitochondrion,_complete_genome	75.24
+NC_037013.1_Catostomus_catostomus_isolate_NEFC_F16-592_mitochondrion,_complete_genome	24.75

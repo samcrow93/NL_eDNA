@@ -1,0 +1,3 @@
+#NC_001717.1_Oncorhynchus_mykiss_mitochondrion,_complete_genome	0.001
+#NC_012361.1_Fundulus_diaphanus_mitochondrion,_complete_genome	75.24
+NC_009576.1_Alosa_pseudoharengus_mitochondrion,_complete_genome		24.75

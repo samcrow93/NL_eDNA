@@ -1,0 +1,3 @@
+NC_024032.1_Salmo_trutta_mitochondrion,_complete_genome		0.001
+NC_015246.1_Osmerus_mordax_mitochondrion,_complete_genome	75.24
+NC_011580.1_Apeltes_quadracus_mitochondrion,_complete_genome	24.75

@@ -1,0 +1,7 @@
+NC_012312.1_Fundulus_heteroclitus_mitochondrion,_complete_genome	0.001
+NC_024032.1_Salmo_trutta_mitochondrion,_complete_genome		75.24
+#KP644368.1_Microgadus_tomcod_isolate_5884_12S_ribosomal_RNA_gene,_partial_sequence;_mitochondrial	4.95
+NC_009576.1_Alosa_pseudoharengus_mitochondrion,_complete_genome		4.95
+NC_020762.1_Coregonus_clupeaformis_mitochondrion,_complete_genome	4.95
+NC_014690.1_Alosa_sapidissima_mitochondrion,_complete_genome	4.95
+NC_006547.2_Anguilla_rostrata_mitochondrion,_complete_genome	4.95

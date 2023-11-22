@@ -1,0 +1,15 @@
+NC_011580.1_Apeltes_quadracus_mitochondrion,_complete_genome	0.001
+NC_001960.1_Salmo_salar_mitochondrion,_complete_genome		75.24
+NC_001717.1_Oncorhynchus_mykiss_mitochondrion,_complete_genome		1.85
+NC_009576.1_Alosa_pseudoharengus_mitochondrion,_complete_genome		1.85
+NC_006547.2_Anguilla_rostrata_mitochondrion,_complete_genome	1.85
+NC_015246.1_Osmerus_mordax_mitochondrion,_complete_genome	1.85
+NC_012312.1_Fundulus_heteroclitus_mitochondrion,_complete_genome	1.85
+NC_024032.1_Salmo_trutta_mitochondrion,_complete_genome		1.85
+NC_014690.1_Alosa_sapidissima_mitochondrion,_complete_genome	1.85
+NC_011570.1_Gasterosteus_wheatlandi_mitochondrion,_complete_genome	1.85	
+NC_020762.1_Coregonus_clupeaformis_mitochondrion,_complete_genome	1.85
+NC_000860.1_Salvelinus_fontinalis_mitochondrion,_complete_genome	1.85
+#KP644368.1_Microgadus_tomcod_isolate_5884_12S_ribosomal_RNA_gene,_partial_sequence;_mitochondrial	1.85
+NC_000861.1_Salvelinus_alpinus_mitochondrion,_complete_genome	1.85
+NC_012361.1_Fundulus_diaphanus_mitochondrion,_complete_genome	1.85

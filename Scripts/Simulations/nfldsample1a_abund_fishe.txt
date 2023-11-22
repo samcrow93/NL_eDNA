@@ -1,0 +1,3 @@
+NC_020762.1_Coregonus_clupeaformis_mitochondrion,_complete_genome	0.001
+NC_001960.1_Salmo_salar_mitochondrion,_complete_genome	75.24
+#KP644368.1_Microgadus_tomcod_isolate_5884_12S_ribosomal_RNA_gene,_partial_sequence;_mitochondrial	24.75

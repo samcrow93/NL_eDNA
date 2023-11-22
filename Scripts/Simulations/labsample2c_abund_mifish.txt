@@ -1,0 +1,7 @@
+NC_037013.1_Catostomus_catostomus_isolate_NEFC_F16-592_mitochondrion,_complete_genome	0.001
+NC_020764.1_Prosopium_cylindraceum_mitochondrion,_complete_genome	75.24
+NC_008647.1_Catostomus_commersonii_mitochondrion,_complete_genome	4.95
+NC_068673.1_Cottus_cognatus_voucher_NEFC_F19-402_mitochondrion,_complete_genome		4.95
+NC_041244.1_Gasterosteus_aculeatus_mitochondrion,_complete_genome	4.95
+NC_020762.1_Coregonus_clupeaformis_mitochondrion,_complete_genome	4.95
+NC_014690.1_Alosa_sapidissima_mitochondrion,_complete_genome	4.95

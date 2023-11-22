@@ -1,0 +1,4 @@
+NC_006547.2_Anguilla_rostrata_mitochondrion,_complete_genome	0.001
+NC_014690.1_Alosa_sapidissima_mitochondrion,_complete_genome	75.24
+#AF023192.1_Margariscus_margarita_12S_ribosomal_RNA_gene,_mitochondrial_gene_for_mitochondrial_RNA,_complete_sequence	0
+#Above sequence is commented out because when running Grinder with abundances, if sequence does not exist the program fails out

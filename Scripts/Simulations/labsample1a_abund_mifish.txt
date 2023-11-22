@@ -1,0 +1,3 @@
+NC_036392.1_Salvelinus_namaycush_strain_NEFC_F16-146_mitochondrion,_complete_genome	0.001
+NC_014690.1_Alosa_sapidissima_mitochondrion,_complete_genome	75.24
+NC_009576.1_Alosa_pseudoharengus_mitochondrion,_complete_genome		24.75

@@ -1,0 +1,7 @@
+NC_009576.1_Alosa_pseudoharengus_mitochondrion,_complete_genome		0.001
+NC_006547.2_Anguilla_rostrata_mitochondrion,_complete_genome	75.24
+NC_012361.1_Fundulus_diaphanus_mitochondrion,_complete_genome	4.95
+NC_015246.1_Osmerus_mordax_mitochondrion,_complete_genome	4.95
+NC_001717.1_Oncorhynchus_mykiss_mitochondrion,_complete_genome	4.95
+#KP644368.1_Microgadus_tomcod_isolate_5884_12S_ribosomal_RNA_gene,_partial_sequence;_mitochondrial	4.95
+NC_041244.1_Gasterosteus_aculeatus_mitochondrion,_complete_genome	4.95
