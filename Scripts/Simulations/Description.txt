@@ -1,0 +1,1 @@
+This directory contains scripts and input data to run simulations to test performance of markers and pipelines used on NL field eDNA.
